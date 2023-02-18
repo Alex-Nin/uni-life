@@ -1,0 +1,36 @@
+
+.selection-favorites-description {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1.9rem;
+    font-weight: 300;
+}
+
+.selection-favorites-element {
+    width: 40%;
+    margin: 100px 0 101px 110px;
+}
+
+.selection-favorites-item {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.selection-favorites-item > * {
+    margin: 0 10px;
+}
+
+.selection-favorites-title {
+    font-size: 1.6rem;
+    margin: 14px 0;
+}
+
+#search-compare-btn {
+    width: 266px;
+    margin-left: 45px;
+}
+
+#image-of-person {
+    float: right;
+    margin-right: 217px;
+}

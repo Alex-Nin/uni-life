@@ -1,0 +1,33 @@
+.banner,
+.banner-left,
+.banner-right {
+    display: flex;
+}
+
+.banner {
+    justify-content: space-between;
+    background-color: var(--primary-blue);
+    
+    padding: 14px 84px;
+}
+
+.banner, .banner a {
+    color: var(--primary-white);
+}
+
+.banner-right,
+.banner-left {
+    align-items: center;  
+}
+
+.banner-left p{
+    font-size: 1.8em;
+}
+
+.banner-right p{
+    font-size: 94%;
+    font-weight: 200;
+}
+
+
+

@@ -1,0 +1,29 @@
+.header {
+    height: 55vh;
+    background-image: linear-gradient(rgb(39,38,42,0.7), rgb(39,38,42,0.7)), url(../../assets/cover-img.png); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--primary-white);
+}
+
+.header h2 {
+    font-size: 4em;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.header p {
+    font-size: 1.5em;
+    font-weight: 300;
+    line-height: 2.3rem;
+}
+
+.header > * {
+    width: 53%;
+}
+

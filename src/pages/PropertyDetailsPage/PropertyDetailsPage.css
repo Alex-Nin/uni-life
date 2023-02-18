@@ -1,0 +1,156 @@
+.props-details-page {
+    width: 88%;
+    margin: 80px auto;
+}
+
+#backToSearch {
+    color: var(--primary-black);
+
+}
+
+#backToSearch > * {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+
+.prop-details-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px 50px;
+    margin-top: 30px;
+}
+
+.prop-large-img {
+    height: 33vh;
+    background-size: cover;
+    margin-bottom: 15px;
+    border-radius: 18px;
+}
+
+.prop-small-imgs{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 15px;
+}
+
+.prop-small-imgs > * {
+    height: 11vh;
+    background-size: cover;
+    border-radius: 13px;
+}
+
+.prop-details-box-container {
+    text-align: center;
+    padding: 35px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.prop-details-box-container h2 {
+    width: 85%;
+    font-size: 2.4rem;
+    font-weight: 300;
+    border-bottom: 1px solid var(--border-color);
+    margin: 0 auto 50px;
+    padding-bottom: 30px;
+    line-height: 3.7rem;
+}
+
+.prop-details-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 55px 0;
+}
+
+.center-items {
+    display: flex;
+    justify-content: center;
+    gap: 0 5px;
+}
+
+#fontStyle {
+    color: var(--secondary-blue);
+    font-weight: 600;
+}
+
+#fontStyle p{
+    font-size: 2.3rem;
+}
+
+.prop-details-box p {
+    color: var(--secondary-blue);
+    font-size: clamp(1rem, 1.5rem, 2rem);
+    font-weight: 600;
+}
+
+.prop-details-box > * {
+    margin-top: 20px;
+}
+
+.prop-detials-btns {
+    margin-top: 20px;
+    gap: 0 15px;
+}
+.prop-detials-btns > * {
+    flex-basis: 50%;
+    padding: 13px 0;
+    border-radius: 15px;
+    
+}
+
+#shortlistBtn {
+    border: 1px solid var(--border-color);
+    background-color: var(--primary-white);
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+#bookBiewingBtn {
+    border: none;
+    background-color: var(--secondary-blue);
+    color: var(--primary-white);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.property-description {
+    line-height: 2.2rem;
+}
+
+.prop-description-titles {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.property-description p,
+.prop-bedroom-prices ul li,
+.prop-key-features ul li {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.prop-bedroom-prices ul {
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.prop-bedroom-prices ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.prop-bedroom-prices ul li:last-child {
+    border: none;
+}
+
+
+.prop-key-features ul li {
+    display: flex;
+    gap: 0 5px;
+    padding-bottom: 40px;
+}

@@ -1,0 +1,171 @@
+.dropdown-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-white);
+    width: 88%;
+    height: 14vh;
+    margin: 0 auto;
+    box-shadow: 0 2px 24px 0 rgb(172 172 172);
+    border-radius: 20px;
+    bottom: 65px;
+    padding: 0 43px;
+    gap: 0 45px;
+    z-index: 2;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 11px 0;
+    flex: 1;
+}
+
+.dropdown-menu > label {
+    font-size: 1.5rem;
+}
+
+#dropdown {
+    font-size: 1.3rem;
+    padding: 10px 13px;
+    border-radius: 15px;
+}
+
+.props-container {
+    width: 88%;
+    margin: 0 auto 100px;
+}
+
+.num-of-props {
+    margin: 20px 0 55px;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.prop-box-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 37px;
+}
+
+.prop-img-container {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 23vh;
+    border-radius: 20px 20px 0 0;
+}
+
+.prop-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 23px;
+    background-color: var(--secondary-blue);
+    color: var(--primary-white);
+}
+
+.prop-banner-left h4{
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.prop-banner-left p {
+    font-size: 0.7rem;
+    margin-bottom: 11px;
+}
+
+.flex-display {
+    display: flex;
+}
+
+.prop-banner-right{
+    gap: 0 20px;
+}
+
+.icon-container {
+    gap: 0 9px;
+    align-items: center;
+}
+
+
+.prop-banner-right p {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.inline {
+    display: inline;
+}
+
+.prop-info {
+    padding: 30px 23px;
+    border: 1px solid var(--border-color);
+}
+
+.prop-info > * {
+    display: flex;
+}
+
+.prop-type-furnished {
+    margin-bottom: 20px;
+    justify-content: space-between;
+    font-size: 1.8rem;
+}
+
+.prop-type-furnished > * {
+    font-weight: 400;
+}
+
+.address {
+    gap: 0 3px;
+    font-size: 0.8rem;
+    align-items: center;
+}
+
+.prop-link {
+    border-right: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 0;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+}
+
+.prop-link > * {
+    display: inline-block;
+}
+
+.prop-link p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-left: 6px;
+}
+
+.city-info-card {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    width: 86%;
+    margin: 0 auto 100px;
+    gap: 0 60px;
+    background-color: var(--card-bg-color);
+    padding: 60px 50px;
+}
+
+.city-info-card img {
+    border-radius: 20px;
+}
+
+.city-info-card h2 {
+    font-size: 2.1rem;
+    font-weight: 400;
+    margin: 20px 0 40px 0;
+}
+
+.city-info-card p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 2.2rem;
+}
