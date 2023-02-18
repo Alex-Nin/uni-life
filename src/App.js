@@ -23,9 +23,9 @@ function App() {
         <Router>
           <Banner />
             <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="cities-detail-page" element={<CitiesDetailPage />} />
-              <Route path="see-all-cities-page" element={<SeeAllCitiesPage />} />
+              <Route path="/uni-life" element={<Homepage />} />
+              <Route path="/cities-detail-page" element={<CitiesDetailPage />} />
+              <Route path="/see-all-cities-page" element={<SeeAllCitiesPage />} />
               <Route path='/cities-detail-page/property-details-page/:prop_id' element={<PropertyDetailsPage />} />
               <Route path='about-us' element={<AboutUs />} />
               <Route path='terms-and-conditions' element={<TermsAndConditions />} />

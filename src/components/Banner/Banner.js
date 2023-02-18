@@ -15,7 +15,7 @@ const iconStyle = {
 const Banner = () => {
   return (
     <div className='banner'>
-      <Link to='/'><div className='banner-left'>
+      <Link to='/uni-life'><div className='banner-left'>
         <IconContext.Provider value={{size: '30px'}}>
           <RiHome4Line style={iconStyle}></RiHome4Line>
         </IconContext.Provider>
