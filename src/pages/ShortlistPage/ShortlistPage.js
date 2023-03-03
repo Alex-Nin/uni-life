@@ -74,7 +74,7 @@ const ShortlistPage = () => {
             </div>
           </div>
           <div className='prop-link-and-btn'>
-              <Link to={`../uni-life/cities-detail-page/property-details-page/${property._id}`}>
+              <Link to={`../uni-life/cities-detail-page/${property.city_id._id}/property-details-page/${property._id}`}>
                   <div className='prop-link-page'>
                       <GrHomeRounded style={{marginRight: 5}} />
                       <p>View Home</p>
