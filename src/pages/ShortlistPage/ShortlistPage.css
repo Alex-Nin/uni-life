@@ -1,0 +1,79 @@
+.shortlist-page {
+    width: 90%;
+    margin: 0 auto 84px;
+}
+
+.shortlist-page h2 {
+    margin: 56px 0;
+    font-size: 2.7rem;
+    font-weight: 400;
+}
+
+.removed-home-text{
+    text-align: center;
+    margin: 50px 0;
+    font-weight: 300;
+    font-size: 2rem;
+}
+
+.favorites-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 37px;
+}
+
+.prop-link-and-btn{
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+}
+
+.prop-link-and-btn > * {
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.prop-link-and-btn a {
+    width: 50%;
+    padding: 16px 20px;
+    color: var(--primary-black);
+    border-radius: 0 0 0 20px;
+}
+
+.prop-link-and-btn a:hover {
+    background-color: var(--secondary-blue);
+    color: var(--primary-white);
+    transition: 0.2s;
+}
+
+.prop-link-page > * {
+    display: inline-block;
+}
+
+.prop-link-and-btn p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-left: 6px;
+}
+
+.remove-btn-container {
+    width: 50%;
+    padding: 16px 20px;
+    border-radius: 0 0 20px 0;
+    text-align: center;
+}
+
+
+.remove-btn-container:hover {
+    background-color: var(--secondary-blue);
+    transition: 0.3s;
+}
+
+.remove-btn-container:hover .remove-btn{
+    color: var(--primary-white);
+    transition: 0.3s;
+}
+

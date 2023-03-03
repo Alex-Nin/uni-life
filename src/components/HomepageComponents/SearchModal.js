@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelectedCity, useSetSelectedCity } from '../CityContext'
 import axios from 'axios'
 import './HomepageComponents.css'
@@ -9,6 +9,9 @@ const SearchModal = () => {
   const selectedCity = useSelectedCity()
   const setSelectedCity = useSetSelectedCity()
   const [selectedBed, setSelectedBed] = useState('0')
+  const [pageNum, setPageNum] = useState(1)
+
+  const navigate = useNavigate()
 
   const handleCityChange = e => {
     setSelectedCity(e.target.value)
@@ -20,7 +23,7 @@ const SearchModal = () => {
 
   const fontStyle = {
     city: {
-      color: selectedCity !== '0' ? 'black' : 'var(--border-color)' 
+      color: selectedCity !== null ? 'black' : 'var(--border-color)' 
     },
     bedrooms: {
       color: selectedBed !== '0' ? 'black' : 'var(--border-color)' 
@@ -28,37 +31,47 @@ const SearchModal = () => {
   }
   
   useEffect(()=>{
-      axios.get('https://unilife-server.herokuapp.com/properties')
-      .then((result) => setCities(result.data.data))
-      //.then((result) => console.log(result.data.data))
+      axios.get(`https://unilife-server.herokuapp.com/cities?page=1`)
+      .then((result) => setCities(result.data.response))
+      //.then((result) => console.log(result.data.response))
       .catch((err) => console.log(err));
+
+      axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
+      .then((result) => result.data.response.forEach((element) => {setCities((prevCities) => [...prevCities, element])}) )
+      //.then((result) => console.log(result.data.response))
+      .catch((err) => console.log(err));
+
   }, []);
   
-  //Removes duplicates from arrays
-  const numBeds = []
-  const cityAll = []
-  for(let i = 1; i < cities.length; i++) {
-    cityAll.push(cities[i]?.city_id.name);
-    numBeds.push(cities[i]?.bedroom_count);
+  //Creates array of names to be sorted
+  
+  function allCitiesSorted(cities) {
+    const allCities = []
+    for(let i = 0; i < cities.length; i++) {
+      allCities.push(cities[i]?.name);
+    }
+    return allCities.sort()
   }
-  const citySet = new Set(cityAll)
-  const numBedsSet = new Set(numBeds)
+
+  function findCityIdByName(cities) {
+    for(let i = 0; i < cities.length; i++) {
+      if (cities[i].name === selectedCity){
+        return cities[i]._id
+      }
+    }
+  }
 
   return (
         <div className='search-modal'>
           <select id='list' onChange={handleCityChange} style={fontStyle.city}>
-            <option value={'0'}>Select a city</option>
-            {[...citySet].sort().map((city, id) => (
+            <option value={'null'}>Search by city</option>
+            {allCitiesSorted(cities).map((city, id) => (
             <option value={city} key={id}>{city}</option>
           ))}
           </select>
-          <select id='list' onChange={handleBedChange} style={fontStyle.bedrooms}>
-            <option value={'0'}>Search bedroom</option>
-            {[...numBedsSet].sort().map((bed, id) => (
-            <option value={bed} key={id}>{bed}</option>
-            ))}
-          </select>
-          <Link to='/cities-detail-page'><button className='button-style'>Find Homes</button></Link>
+            <button id='findHomeBtn' className='button-style' onClick={selectedCity !== null ? () => {navigate(`/uni-life/cities-detail-page/${findCityIdByName(cities)}`)} : null}>
+              Find Homes
+            </button>
       </div>      
   )
 }

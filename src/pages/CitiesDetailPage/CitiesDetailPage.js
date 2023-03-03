@@ -1,113 +1,152 @@
 import React, {useState, useEffect} from 'react'
 import { useSelectedCity } from '../../components/CityContext'
 import { MdOutlinePlace } from "react-icons/md";
-import { TbBath, TbBed } from 'react-icons/tb'
-import students from '../../assets/students.png';
+import { TbBath, TbBed, TbRuler2 } from 'react-icons/tb'
 import { GrHomeRounded } from "react-icons/gr";
+import students from '../../assets/students.png';
 import axios from 'axios'
 import Header from '../../components/Header/Header'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import './CitiesDetailPage.css'
-//Need to add a property cards to handle where the cards go
-// need to do an axios call to get each property info
-//figure out filtering for react webpages
-const CitiesDetailPage = () => {
 
+const CitiesDetailPage = () => {
   const heading = 'Search Accomodation'
   const paragraph = "Whatever you're after, we can help you find the right student accommodation for you."
 
   const selectedCity = useSelectedCity()  
-
-  const [minBedroom, setMinBedroom] = useState('0')
-  const [minBathroom, setMinBathroom] = useState('0')
-  const [maxPrice, setMaxPrice] = useState('0')
-  const [homeType, setHomeType] = useState('0')
+  const { city_id } = useParams()
+  const [bedDisabled, setBedDisabled] = useState(false)
+  const [bathDisabled, setBathDisabled] = useState(false)
+  const [priceDisabled, setPriceDisabled] = useState(false)
+  const [typeDisabled, setTypeDisabled] = useState(false)
   const [cityCount, setCityCount] = useState(0)
+  const [state, setState] = useState({
+    bedroom: '0',
+    bathroom: '0',
+    price: '100000',
+    type: 'all'
+  })
   const [propertyTypes, setPropertyTypes] = useState([])
-  const [properties, setProperties] = useState([]);
-  const [cities, setCities] = useState([]);
-  let cityExist = false
+  const [city, setCity] = useState([]);
+  const [properties, setProperties] = useState([])
+  const [filteredResults, setFilteredResults] = useState(properties)
 
-  const handleBedChange = e => {
-    setMinBedroom(e.target.value)
+  const handleChange = e => {
+    const value = e.target.value
+    const name = e.target.name
+    setState({
+      ...state,
+      [name]: value
+    })
+    if(name === 'bedroom'){
+      setFilteredResults(properties.filter(item => item.bedroom_count >= value))
+      if(value === '0'){
+        setBathDisabled(false)
+        setPriceDisabled(false)
+        setTypeDisabled(false)
+      }else{
+        setBathDisabled(true)
+        setPriceDisabled(true)
+        setTypeDisabled(true)
+      }
+    }
+    else if(name === 'bathroom'){
+      setFilteredResults(properties.filter(item => item.bathroom_count >= value))
+      if(value === '0'){
+        setBedDisabled(false)
+        setPriceDisabled(false)
+        setTypeDisabled(false)
+      }else{
+        setBedDisabled(true)
+        setPriceDisabled(true)
+        setTypeDisabled(true)
+      }
+    }
+    else if(name === 'price'){
+      setFilteredResults(properties.filter(item => findLowest(item.bedroom_prices) <= value))
+      if(value === '100000'){
+        setBedDisabled(false)
+        setBathDisabled(false)
+        setTypeDisabled(false)
+      }else{
+        setBedDisabled(true)
+        setBathDisabled(true)
+        setTypeDisabled(true)
+      }
+    }
+    else if(name === 'type'){
+      setFilteredResults(properties.filter(item => item.property_type === value))
+      if(value === 'all'){
+        setBedDisabled(false)
+        setBathDisabled(false)
+        setPriceDisabled(false)
+      }else{
+        setBedDisabled(true)
+        setBathDisabled(true)
+        setPriceDisabled(true)
+      }
+    }
   }
-  const handleBathChange = e => {
-    setMinBathroom(e.target.value)
-  }
-  const handlePriceChange = e => {
-    setMaxPrice(e.target.value)
-  }
-  const handleHomeTypeChange = e => {
-    setHomeType(e.target.value)
+
+  function propsArray(){
+    if (filteredResults < 1) {
+      return properties
+    }
+    return filteredResults
   }
 
   const getStyle = {
     bedrooms: {
-      color: minBedroom !== '0' ? 'black' : 'var(--border-color)' 
+      color: state.bedroom !== '0' ? 'var(--primary-black)' : 'var(--border-color)' 
     },
     bathrooms: {
-      color: minBathroom !== '0' ? 'var(--primary-black)' : 'var(--border-color)' 
+      color: state.bathroom !== '0' ? 'var(--primary-black)' : 'var(--border-color)' 
     },
     price: {
-      color: maxPrice !== '0' ? 'var(--primary-black)' : 'var(--border-color)'  
+      color: state.price !== '100000' ? 'var(--primary-black)' : 'var(--border-color)'  
     },
     homeType: {
-      color: homeType !== '0' ? 'var(--primary-black)' : 'var(--border-color)' 
+      color: state.type !== 'all' ? 'var(--primary-black)' : 'var(--border-color)' 
     }, 
   }
-
-  function findLowest(prices) {
-    const newPrices = []
-    for(let [key,value] of Object.entries(prices)) {
-      newPrices.push(value)
-    }
-    let lowest = newPrices[0]
-    
-    for (let i = 0; i < newPrices.length; i++) {
-      if (newPrices[i] < lowest){
-        lowest = newPrices[i]
-      }
-    }
-    return `${lowest}`
-  }
-
   
 
-  function notNull(city) {
-    return city.address !== undefined
+  //Finds the lowest bedroom price
+  function findLowest(prices) {
+    const newPrices = []
+    if(prices !== undefined){
+      for(let [key, value] of Object.entries(prices)) {
+        newPrices.push(value)
+      }
+      let lowest = newPrices[0]
+      
+      for (let i = 0; i < newPrices.length; i++) {
+        if (newPrices[i] < lowest){
+          lowest = newPrices[i]
+        }
+      }
+      return `${lowest}`
+    }
+    return
   }
 
   useEffect(()=>{
-    axios.get('https://unilife-server.herokuapp.com/properties')
-    .then((result) => setProperties(result.data.data))
-    //.then((result) => console.log(result.data.data))
-    .catch((err) => console.log(err));
-    // will need use context to get city and bedroom count from search modal
-    // learn filtering
-    // the cities route doesnt have all the info for all cities
+    
+    axios.get(`https://unilife-server.herokuapp.com/properties/city/${city_id}`)
+    .then((result) => setProperties(result.data.response))
+    .then(setCityCount(properties.length))
+    .catch((err) => console.log(err))
 
-    axios.get('https://unilife-server.herokuapp.com/cities')
-    .then((result) => setCities(result.data.response))
-    //.then((result) => console.log(result.data.response))
+    axios.get(`https://unilife-server.herokuapp.com/cities/${city_id}`)
+    .then((result) => setCity(result.data.data[0]))
     .catch((err) => console.log(err));
 
     axios.get('https://unilife-server.herokuapp.com/propertyTypes')
     .then((result) => setPropertyTypes(result.data.response))
-    //.then((result) => console.log(result.data.response))
     .catch((err) => console.log(err));
-  }, []);
 
-  function doesExist(selectedCity) {
-    for(let i = 0; i < cities.length; i++) {
-      if (selectedCity === cities[i]?.name) {
-        return cityExist = true
-      }
-    }
-    cityExist = false
-  }
-
-  doesExist(selectedCity)
+  }, [properties]);
 
   return (
 
@@ -116,17 +155,19 @@ const CitiesDetailPage = () => {
       <div className='dropdown-container'>
         <div className='dropdown-menu'>
             <label>Min Bedroom</label>
-            <select id='dropdown' onChange={handleBedChange} style={getStyle.bedrooms}>
+            <select id='dropdown' name='bedroom' onChange={handleChange} style={getStyle.bedrooms} value={state.bedroom} disabled={bedDisabled}>
               <option value={'0'}>Any bedroom</option>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
-              <option value={4}>4+</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+              <option value={6}>6+</option>
             </select>
         </div>
         <div className='dropdown-menu'>
             <label>Min Bathroom</label>
-            <select id='dropdown' onChange={handleBathChange} style={getStyle.bathrooms}>
+            <select id='dropdown' name='bathroom' onChange={handleChange} style={getStyle.bathrooms} value={state.bathroom} disabled={bathDisabled}>
               <option value={'0'}>Any bathroom</option>
               <option value={1}>1</option>
               <option value={2}>2</option>
@@ -135,14 +176,20 @@ const CitiesDetailPage = () => {
         </div>
         <div className='dropdown-menu'>
             <label>Max Price</label>
-            <select id='dropdown' onChange={handlePriceChange} style={getStyle.price}>
-              <option value={'0'}>Any Price</option>
+            <select id='dropdown' name='price' onChange={handleChange} style={getStyle.price} value={state.price} disabled={priceDisabled}>
+              <option value={'100000'}>Any Price</option>
+              <option value={150}>$150</option>
+              <option value={200}>$200</option>
+              <option value={250}>$250</option>
+              <option value={300}>$300</option>
+              <option value={350}>$350</option>
+              <option value={351}>$351+</option>
             </select>
         </div>
         <div className='dropdown-menu'>
             <label>Home Type</label>
-            <select id='dropdown' onChange={handleHomeTypeChange} style={getStyle.homeType}>
-              <option value={'0'}>Any type</option>
+            <select id='dropdown' name='type' onChange={handleChange} style={getStyle.homeType} value={state.type} disabled={typeDisabled}>
+              <option value={'all'}>Any type</option>
               {propertyTypes.map((prop, id) =>
               <option key={id} value={prop.name}>{prop.name}</option>
               )}
@@ -150,55 +197,47 @@ const CitiesDetailPage = () => {
         </div>
       </div>
       <div className='props-container'>
-        <h2 className='num-of-props'>{cityCount} homes in {selectedCity}</h2>
+        <h2 className='num-of-props'>{filteredResults < 1 ? cityCount : filteredResults.length} homes in {selectedCity}</h2>
         <div className='prop-box-container'>
-        {properties.filter(notNull).map((city, id) => (
-            selectedCity === city?.city_id.name 
-            ?
-
-              <div className='prop-box' key={id}>
-                <div className='prop-img-container' style={{backgroundImage: `url(${city?.images[1]})`}}></div>
-                <div className='prop-banner'>
-                  <div className='prop-banner-left'>
-                    <p>Rooms Starting at:</p>
-                    <h4>${findLowest(city.bedroom_prices)}</h4>
-                  </div>
-                  <div className='prop-banner-right flex-display'>
-                    <div className='icon-container flex-display'>
-                      <TbBed size={32.5}></TbBed>
-                      <p>{city.bedroom_count}</p>
-                    </div>
-                    <div className='icon-container flex-display'>
-                      <TbBath size={32.5}></TbBath>
-                      <p>{city.bathroom_count}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className='prop-info'>
-                  <div className='prop-type-furnished'>
-                    <h6>{city.property_type}</h6>
-                    <h6>{city.furnished}</h6>
-                  </div>
-                  <div className='address'>
-                    <MdOutlinePlace size={25} style={{color: "var(--secondary-blue)"}}></MdOutlinePlace>
-                    <p>{city.address.street}, {city.address.city}, {city.address.postcode}</p>
-                  </div>
-                </div>
-                <Link to={`property-details-page/${city._id}`}><div className='prop-link'>
-                  <GrHomeRounded></GrHomeRounded>
-                  <p>View Home</p>
-                </div></Link>
+        {propsArray()?.map((property, id) => (
+        <div className='prop-box' key={id}>
+          <div className='prop-img-container' style={{backgroundImage: `url(${property?.images[1]})`}}></div>
+          <div className='prop-banner'>
+            <div className='prop-banner-left'>
+              <p>Rooms Starting at:</p>
+              <h4>${findLowest(property?.bedroom_prices)}</h4>
+            </div>
+            <div className='prop-banner-right flex-display'>
+              <div className='icon-container flex-display'>
+                <TbBed size={32.5}></TbBed>
+                <p>{property?.bedroom_count}</p>
               </div>
-
-            : null
-      ))}
+              <div className='icon-container flex-display'>
+                <TbBath size={32.5}></TbBath>
+                <p>{property?.bathroom_count}</p>
+              </div>
+            </div>
+          </div>
+          <div className='prop-info'>
+            <div className='prop-type-furnished'>
+              <h6>{property?.property_type}</h6>
+              <h6>{property?.furnished}</h6>
+            </div>
+            <div className='address'>
+              <MdOutlinePlace size={25} style={{color: "var(--secondary-blue)"}}></MdOutlinePlace>
+              <p>{property?.address.street}, {property?.address.city}, {property?.address.postcode}</p>
+            </div>
+          </div>
+          <Link to={`../uni-life/cities-detail-page/${city_id}/property-details-page/${property?._id}`} style={{cursor: 'pointer'}}>
+            <div className='prop-link'>
+              <GrHomeRounded />
+              <p>View Home</p>
+            </div>
+          </Link>
+        </div>
+    ))}
         </div>
       </div>
-      {
-        cityExist 
-        ? cities.map((city, id) => (
-          selectedCity === city?.name
-          ? 
         <div className='city-info-card'>
           <div className='city-info'>
             <h2>Being a student in {city.name}</h2>
@@ -209,24 +248,7 @@ const CitiesDetailPage = () => {
           <div className='city-img'>
             <img alt='students' src={students}/>
           </div>
-        </div> : null ))
-        : 
-        <div className='city-info-card'>
-          <div className='city-info'>
-            <h2>Being a student in {selectedCity}</h2>
-            <p>{selectedCity} is a lively and multicultural city with a large student population. It is quite a compact city, so it is easy to get around and has a community feel. {selectedCity} is the perfect mix of city and town life and has something to offer to anyone who calls it home.</p>
-            <br/>
-            <p>{selectedCity} is home to three universities, the University of {selectedCity}, {selectedCity} Trinity University and {selectedCity} Beckett University</p>
-          </div>
-          <div className='city-img'>
-            <img alt='students' src={students}/>
-          </div>
-      </div>
-      }
-       
-
-      
-
+        </div>
     </>
   )
 }

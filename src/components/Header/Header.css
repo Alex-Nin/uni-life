@@ -12,18 +12,66 @@
 }
 
 .header h2 {
-    font-size: 4em;
+    font-size: 4rem;
     font-weight: 400;
     margin-bottom: 40px;
 }
 
 .header p {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: 300;
     line-height: 2.3rem;
 }
 
 .header > * {
     width: 53%;
+}
+
+@media screen and (max-width: 1000px) {
+    .header > * {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .header h2 {
+        font-size: 3rem;
+    }
+    
+    .header p {
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .header {
+        height: 45vh;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .header {
+        justify-content: flex-start;
+    }
+
+    .header > * {
+        width: 90%;
+    }
+
+    .header h2 {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .header h2 {
+        font-size: 2.3rem;
+    }
+    
+    .header p {
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+    }
 }
 

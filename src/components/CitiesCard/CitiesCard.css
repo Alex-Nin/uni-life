@@ -8,31 +8,104 @@
     font-weight: 400;
 }
 
-.cities-box-container {
+.home-cities-box-container,
+.all-cities-box-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     width: 90%;
-    gap: 45px;
     margin: 50px auto;
+}
+
+.home-cities-box-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 45px;
+}
+
+.all-cities-box-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 47px 21px;
 }
 
 .cities-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: black;
+    border-radius: 40px;
+    height: 35vh;
+    color: var(--primary-white);
+    color: white;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.cities-box:hover {
-    background-color: var(--secondary-blue);
-    color: white;
-}
 
 .cities-box h3 {
     font-size: 2.2rem;
 }
 
+.all-cities-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 8vh;
+    border-radius: 25px;
+    border: 1px solid var(--border-color);
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.all-cities-box:hover {
+    background-color: var(--secondary-blue);
+    color: white;
+}
+
+.all-cities-box h3 {
+    font-size: 2.2rem;
+}
+
+@media screen and (max-width: 1080px) {
+    .home-cities-box-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cities-box {
+        height: 40vh;
+    }
+
+    .all-cities-box-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .all-cities-box-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .home-cities-box-container {
+        grid-template-columns: 1fr;  
+    }
+
+    .cities-container {
+        margin: 0 0 50px;
+    }
+
+    .cities-box {
+        height: 40vh;
+    }
 
 
+    .cities-container-title {
+        font-size: 2rem;
+        width: 90%;
+        margin: 30px auto 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .all-cities-box-container {
+        grid-template-columns: 1fr;
+    }
+}

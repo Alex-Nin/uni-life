@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header';
-import CitiesCard from '../../components/CitiesCard/CitiesCard';
+import AllCitiesCard from '../../components/CitiesCard/AllCitiesCard';
 import { useSetSelectedCity } from '../../components/CityContext'
 import axios from 'axios';
 
@@ -10,44 +10,52 @@ const SeeAllCitiesPage = () => {
   const heading = 'Student Accomodation';
   const paragraph = 'UniLife have student accommodation available across the UK. Whatever youre after, we can help you find the right student accommodation for you.';
 
-  
-  const citiesStyles = {
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '47px 21px',
-
-  }
   const setSelectedCity = useSetSelectedCity()
   const [cities, setCities] = useState([]);
 
   useEffect(()=>{
-    axios.get('https://unilife-server.herokuapp.com/properties')
-    .then((result) => setCities(result.data.data))
-    //.then((result) => console.log(result.data.data))
-    .catch((err) => console.log(err));
-}, []);
+    axios.get(`https://unilife-server.herokuapp.com/cities?page=1`)
+      .then((result) => setCities(result.data.response))
+      //.then((result) => console.log(result.data.response))
+      .catch((err) => console.log(err));
 
-  const cityAll = []
-  for(let i = 0; i < cities.length; i++) {
-    if(cities[i].address !== undefined) {
-      cityAll.push(cities[i].city_id.name);
+      axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
+      .then((result) => result.data.response.forEach((element) => {setCities((prevCities) => [...prevCities, element])}) )
+      //.then((result) => console.log(result.data.response))
+      .catch((err) => console.log(err));
+  }, []);
+
+  //Creates array of names to be sorted
+  function allCitiesSorted(cities) {
+    const allCities = []
+    for(let i = 0; i < cities.length; i++) {
+      allCities.push(cities[i]?.name);
+    }
+    return allCities.sort()
+  }
+
+  //Returns City Id to be used in link url parameter
+  function findCityIdByName(cities, city) {
+    for(let i = 0; i < cities.length; i++) {
+      if (cities[i].name === city){
+        return cities[i]._id
+      }
     }
   }
 
-  const citySet = new Set(cityAll)
 
   return (
     <div>
       <Header heading={heading} paragraph={paragraph} />
       <div className='cities-container'>
         <h3 className='cities-container-title'>Search by City</h3>
-        <div className='cities-box-container' style={citiesStyles}>
-        {[...citySet].sort()?.map( (city, id) => {
+        <div className='all-cities-box-container'>
+        {allCitiesSorted(cities).map( (city, id) => {
             return (
-            <Link to='../cities-detail-page' onClick={()=>{setSelectedCity(city)}}>
-              <CitiesCard 
+            <Link to={`../uni-life/cities-detail-page/${findCityIdByName(cities, city)}`} onClick={()=>{setSelectedCity(city)}}>
+              <AllCitiesCard 
                 id={id} 
                 city={city}
-                cardStyle = 'all-cities'
               />
             </Link>
             )}

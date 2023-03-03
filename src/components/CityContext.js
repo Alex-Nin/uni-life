@@ -12,7 +12,7 @@ export function useSetSelectedCity() {
 }
 
 export function CityProvider({ children }) {
-    const [selectedCity, setSelectedCity] = useState('0')
+    const [selectedCity, setSelectedCity] = useState(null)
 
 
     return (

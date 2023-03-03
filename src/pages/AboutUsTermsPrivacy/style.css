@@ -1,0 +1,15 @@
+.content {
+    width: 90%;
+    margin: 60px auto;
+}
+
+.title {
+    margin-bottom: 30px;
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.body {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+}

@@ -7,6 +7,10 @@
 }
 
 .selection-favorites-element {
+    display: flex;
+    flex-direction: column;
+    height: 41vh;
+    justify-content: space-between;
     width: 40%;
     margin: 100px 0 101px 110px;
 }
@@ -25,12 +29,78 @@
     margin: 14px 0;
 }
 
-#search-compare-btn {
+.button-style {
+    background-color: var(--secondary-blue);
+    color: var(--primary-white);
+    border-radius: 15px;
+    height: 54px;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#searchCompareBtn {
     width: 266px;
     margin-left: 45px;
 }
 
-#image-of-person {
+#seeAllCitiesBtn {
+    width: 186px;
+}
+
+#findHomeBtn{
+    width: 160px;
+}
+
+#imageOfPerson {
     float: right;
-    margin-right: 217px;
+    margin-right: 59px;
+    margin-top: 99px;
+}
+
+
+
+
+@media screen and (max-width: 1080px) {
+    .button-style {
+        font-size: 1rem;
+    }
+
+    #findHomeBtn{
+        width: 130px;
+    }
+
+    #imageOfPerson {
+        height: 400px;
+        width: 400px;
+        margin-top: 193px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .selection-favorites-element {
+        display: none;
+    }
+
+    #imageOfPerson {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    #findHomeBtn{
+        font-size: 0.8rem;
+        height: 42px;
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #findHomeBtn{
+        font-size: 1.5rem;
+        height: 56px;
+        width: 190px;
+    }
 }

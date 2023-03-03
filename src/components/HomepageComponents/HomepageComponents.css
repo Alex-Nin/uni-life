@@ -1,10 +1,10 @@
 .search-modal {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: var(--primary-white);
-    width: 74%;
+    width: 47%;
     height: 12vh;
     margin: 0 auto;
     box-shadow: 0 2px 24px 0 rgb(172 172 172);
@@ -13,18 +13,6 @@
     padding: 0 43px;
     gap: 0 45px;
     z-index: 2;
-}
-
-.button-style {
-    background-color: var(--secondary-blue);
-    color: var(--primary-white);
-    width: 18%;
-    height: 54px;
-    border-radius: 13px;
-    border: none;
-    font-size: 1.3rem;
-    font-weight: 500;
-    cursor: pointer;
 }
 
 #list {
@@ -75,4 +63,109 @@
     color: var(--text-color);
     line-height: 1.9rem;
     font-weight: 300;
+}
+
+@media screen and (max-width: 1375px) {
+    .search-modal {
+        gap: 0 20px;
+    }
+
+    #list {
+        padding: 14px 90px 14px 29px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .search-modal {
+        gap: 0 10px;
+    }
+
+    #list {
+        padding: 14px 40px 14px 29px;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    #list {
+        font-size: 1.2rem;
+        padding: 14px 50px 14px 29px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .search-modal {
+        width: 55%;
+    }
+
+    #list {
+        padding: 14px 60px 14px 29px;
+    }
+
+    .compare-box-container {
+        flex-direction: column;
+        gap: 40px;
+        height: auto;
+        width: 60%;
+        margin: 30px auto;
+    }
+
+    .compare-box-title {
+        font-size: 2.4rem;
+    }
+
+    .comapre-box-description {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .search-modal {
+        bottom: 43px;
+    }
+
+    #list {
+        padding: 14px 40px 14px 29px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+    #list {
+        font-size: 0.8rem;
+        padding: 14px 30px 14px 29px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .search-modal {
+        flex-direction: column;
+        width: fit-content;
+        height: fit-content;
+        padding: 40px 43px;
+        gap: 20px 0;
+        bottom: 130px;
+    }
+
+    #list {
+        font-size: 1.5rem;
+        padding: 14px 30px 14px 29px;
+    }
+
+    .compare-box-element {
+        padding: 75px 16px;
+    }
+
+    .compare-box-container-title, 
+    .compare-box-title {
+        font-size: 1.8rem;
+    }
+
+    .comapre-box-description {
+        font-size: 1.6rem;
+    }
+
+    .compare-box-container {
+        width: 90%;
+    }
 }

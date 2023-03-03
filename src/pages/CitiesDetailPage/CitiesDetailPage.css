@@ -1,17 +1,17 @@
 .dropdown-container {
     position: relative;
     display: flex;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 38px 45px;
     background-color: var(--primary-white);
     width: 88%;
-    height: 14vh;
     margin: 0 auto;
     box-shadow: 0 2px 24px 0 rgb(172 172 172);
     border-radius: 20px;
     bottom: 65px;
-    padding: 0 43px;
-    gap: 0 45px;
+    padding: 30px 43px;
     z-index: 2;
 }
 
@@ -131,6 +131,13 @@
     padding: 16px 0;
     text-align: center;
     border-radius: 0 0 20px 20px;
+    color: var(--primary-black)
+}
+
+.prop-link:hover {
+    background-color: var(--secondary-blue);
+    color: var(--primary-white);
+    transition: 0.2s;
 }
 
 .prop-link > * {
@@ -149,7 +156,7 @@
     border-radius: 20px;
     width: 86%;
     margin: 0 auto 100px;
-    gap: 0 60px;
+    gap: 30px 60px;
     background-color: var(--card-bg-color);
     padding: 60px 50px;
 }
@@ -168,4 +175,47 @@
     font-size: 1.2rem;
     font-weight: 300;
     line-height: 2.2rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .prop-box-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .prop-box-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .dropdown-container {
+        bottom: 129px;
+    }
+
+    .props-container {
+        margin: -45px auto 100px;
+    }
+}
+
+@media screen and (max-width: 546px) {
+    .dropdown-container {
+        bottom: 190px;
+    }
+
+    .props-container {
+        margin: -115px auto 100px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .city-info-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .city-info-card img {
+        max-width: 100%;
+    }
 }

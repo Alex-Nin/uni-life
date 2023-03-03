@@ -5,9 +5,9 @@ const BottomBanner = () => {
   return (
     <div className='bottom-banner'>
         <ul>
-          <li><Link to='../about-us'>About Us</Link></li>
-          <li><Link to='../terms-and-conditions'>Terms & Conditions</Link></li>
-          <li><Link to='../privacy-policy'>Privacy & Cookie Policies</Link></li>
+          <li><Link to='/uni-life/about-us'>About Us</Link></li>
+          <li><Link to='/uni-life/terms-and-conditions'>Terms & Conditions</Link></li>
+          <li><Link to='/uni-life/privacy-policy'>Privacy & Cookie Policies</Link></li>
         </ul>
         <div className='bottom-banner-item'>
           <p>2022</p>
