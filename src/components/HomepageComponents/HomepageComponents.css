@@ -26,7 +26,7 @@
 .compare-box-element {
     width: 90%;
     margin: 50px auto;
-    padding: 75px 68px;
+    padding: 50px 68px;
     background-color: rgba(246, 250, 253, 1);
     border-radius: 24px;
     text-align: center;
@@ -34,7 +34,6 @@
 
 .compare-box-container {
     display: flex;
-    height: 20vh;
     align-items: center;
     gap: 0 44px;
 }

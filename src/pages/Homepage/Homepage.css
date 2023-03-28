@@ -54,13 +54,12 @@
 }
 
 #imageOfPerson {
+    height: 400px;
+    width: 400px;
     float: right;
     margin-right: 59px;
-    margin-top: 99px;
+    margin-top: 23px;
 }
-
-
-
 
 @media screen and (max-width: 1080px) {
     .button-style {
@@ -72,9 +71,7 @@
     }
 
     #imageOfPerson {
-        height: 400px;
-        width: 400px;
-        margin-top: 193px;
+        margin-top: 36px;
     }
 }
 
