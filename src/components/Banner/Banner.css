@@ -31,6 +31,7 @@
 .banner-right p{
     font-size: 0.9rem;
     font-weight: 200;
+    cursor: pointer;
 }
 
 #closeMenuBtn,
