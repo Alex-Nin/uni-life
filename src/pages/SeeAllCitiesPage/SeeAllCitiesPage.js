@@ -11,18 +11,22 @@ const SeeAllCitiesPage = () => {
   const paragraph = 'UniLife have student accommodation available across the UK. Whatever youre after, we can help you find the right student accommodation for you.';
 
   const setSelectedCity = useSetSelectedCity()
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState([])
 
   useEffect(()=>{
     axios.get(`https://unilife-server.herokuapp.com/cities?page=1`)
       .then((result) => setCities(result.data.response))
-      //.then((result) => console.log(result.data.response))
+      .catch((err) => console.log(err));
+    
+    axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
+      .then((result) => result.data.response.forEach((element) => {setCities((prevCities) => [...prevCities, element])}))
       .catch((err) => console.log(err));
 
-      axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
-      .then((result) => result.data.response.forEach((element) => {setCities((prevCities) => [...prevCities, element])}) )
-      //.then((result) => console.log(result.data.response))
+    //This thrid axios call ensures that the second pages' results doesn't come up undefined 
+    axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
+      .then((result) => console.log(result))
       .catch((err) => console.log(err));
+
   }, []);
 
   //Creates array of names to be sorted
@@ -52,7 +56,7 @@ const SeeAllCitiesPage = () => {
         <div className='all-cities-box-container'>
         {allCitiesSorted(cities).map( (city, id) => {
             return (
-            <Link to={`../uni-life/cities-detail-page/${findCityIdByName(cities, city)}`} onClick={()=>{setSelectedCity(city)}}>
+            <Link key={id} to={`../uni-life/cities-detail-page/${findCityIdByName(cities, city)}`} onClick={()=>{setSelectedCity(city)}}>
               <AllCitiesCard 
                 id={id} 
                 city={city}

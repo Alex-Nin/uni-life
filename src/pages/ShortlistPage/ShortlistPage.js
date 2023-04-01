@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { TbBath, TbBed } from 'react-icons/tb'
 import { GrHomeRounded } from "react-icons/gr";
 import { MdOutlinePlace } from "react-icons/md";
-import axios from 'axios'
 
 import './ShortlistPage.css'
 
@@ -13,14 +12,21 @@ const ShortlistPage = () => {
   const [cityCount, setCityCount] = useState(0)
   const [properties, setProperties] = useState([]);
   const [removeHomeDisplay, setRemoveHomeDisplay] = useState('none')
-  const savedPropertyList = JSON.parse(localStorage.getItem("saved-properties")) || []
+  
+  const savedPropertyList = useMemo(() => JSON.parse(localStorage.getItem("saved-properties")) || [], [])
 
   const handleRemoveHomeClick = (id) => {
-    const index = savedPropertyList.indexOf(id)
+    const localIndex = (element) => element._id === id
+    const index = savedPropertyList.findIndex(localIndex)
     savedPropertyList.splice(index, 1)
     localStorage.setItem("saved-properties", JSON.stringify(savedPropertyList))
     setRemoveHomeDisplay("block");
   }
+
+
+  useEffect(() => {
+    setProperties(savedPropertyList)
+  }, [savedPropertyList])
 
   function findLowest(prices) {
     const newPrices = []
@@ -43,7 +49,7 @@ const ShortlistPage = () => {
       <h2>My Favorites</h2>
       <p className='removed-home-text' style={{display: removeHomeDisplay}}>Home Removed!</p>
       <div className='favorites-container'>
-      {savedPropertyList.map((property, id) => (
+      {properties.map((property, id) => (
 
         <div className='prop-box' key={id}>
           <div className='prop-img-container' style={{backgroundImage: `url(${property?.images[1]})`}}></div>

@@ -20,7 +20,7 @@ const CitiesDetailPage = () => {
   const [bathDisabled, setBathDisabled] = useState(false)
   const [priceDisabled, setPriceDisabled] = useState(false)
   const [typeDisabled, setTypeDisabled] = useState(false)
-  const [cityCount, setCityCount] = useState(0)
+  const [propertyCount, setPropertyCount] = useState(0)
   const [state, setState] = useState({
     bedroom: '0',
     bathroom: '0',
@@ -135,7 +135,7 @@ const CitiesDetailPage = () => {
     
     axios.get(`https://unilife-server.herokuapp.com/properties/city/${city_id}`)
     .then((result) => setProperties(result.data.response))
-    .then(setCityCount(properties.length))
+    .then(setPropertyCount(properties.length))
     .catch((err) => console.log(err))
 
     axios.get(`https://unilife-server.herokuapp.com/cities/${city_id}`)
@@ -197,7 +197,7 @@ const CitiesDetailPage = () => {
         </div>
       </div>
       <div className='props-container'>
-        <h2 className='num-of-props'>{filteredResults < 1 ? cityCount : filteredResults.length} homes in {selectedCity}</h2>
+        <h2 className='num-of-props'>{filteredResults < 1 ? propertyCount : filteredResults.length} homes in {selectedCity}</h2>
         <div className='prop-box-container'>
         {propsArray()?.map((property, id) => (
         <div className='prop-box' key={id}>
