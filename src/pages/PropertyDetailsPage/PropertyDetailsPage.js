@@ -26,7 +26,6 @@ const PropertyDetailsPage = () => {
     const [bookModalDisplay, setBookModalDisplay] = useState('none')
     const [modalPosition, setModalPosition] = useState('-1000px')
     const [property, setProperty] = useState(null)
-    const [tempProp, setTempProp] = useState(null)
     const { prop_id, city_id } = useParams()
     const savedPropertyList = JSON.parse(localStorage.getItem("saved-properties")) || []
 
@@ -50,11 +49,12 @@ const PropertyDetailsPage = () => {
     }
 
     useEffect(()=>{
+        window.scrollTo(0, 0)
+
         axios.get(`https://unilife-server.herokuapp.com/properties/${prop_id}`)
-        .then((result) => result !== undefined ? setProperty(result.data) : null)
-        //.then((result) => console.log(result.data))
-        .catch((err) => console.log(err));
-    }, []);
+            .then((result) => result !== undefined ? setProperty(result.data) : null)
+            .catch((err) => console.log(err));
+    }, [prop_id]);
 
     function convertObjToArray(prices) {
         const newPrices = []

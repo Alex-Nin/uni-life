@@ -8,43 +8,46 @@ const SearchModal = () => {
   const [cities, setCities] = useState([])
   const selectedCity = useSelectedCity()
   const setSelectedCity = useSetSelectedCity()
-  const [selectedBed, setSelectedBed] = useState('0')
-  const [pageNum, setPageNum] = useState(1)
+  //const [selectedBed, setSelectedBed] = useState('0')
 
   const navigate = useNavigate()
 
   const handleCityChange = e => {
     setSelectedCity(e.target.value)
   }
-
+  /*
   const handleBedChange = e => {
     setSelectedBed(e.target.value)
-  }
+  }*/
 
   const fontStyle = {
     city: {
       color: selectedCity !== null ? 'black' : 'var(--border-color)' 
     },
-    bedrooms: {
+    /*bedrooms: {
       color: selectedBed !== '0' ? 'black' : 'var(--border-color)' 
-    }
+    }*/
   }
   
   useEffect(()=>{
-      axios.get(`https://unilife-server.herokuapp.com/cities?page=1`)
+
+    axios.get(`https://unilife-server.herokuapp.com/cities?page=1`)
       .then((result) => setCities(result.data.response))
       //.then((result) => console.log(result.data.response))
       .catch((err) => console.log(err));
 
-      axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
+    axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
       .then((result) => result.data.response.forEach((element) => {setCities((prevCities) => [...prevCities, element])}) )
       //.then((result) => console.log(result.data.response))
       .catch((err) => console.log(err));
 
+    //This thrid axios call ensures that the second pages' results doesn't come up undefined 
+    axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   }, []);
   
-  //Creates array of names to be sorted
-  
+  //Returns sorted array of city names from cities array of objects
   function allCitiesSorted(cities) {
     const allCities = []
     for(let i = 0; i < cities.length; i++) {

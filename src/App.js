@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CityProvider } from './components/CityContext';
 
 import Banner from './components/Banner/Banner';
 import Homepage from './pages/Homepage/Homepage';
@@ -11,14 +12,12 @@ import Footer from './components/Footer/Footer';
 import AboutUs from './pages/AboutUsTermsPrivacy/AboutUs';
 import TermsAndConditions from './pages/AboutUsTermsPrivacy/TermsAndConditions';
 import PrivacyPolicy from './pages/AboutUsTermsPrivacy/PrivacyPolicy';
-import { CityProvider } from './components/CityContext';
 
 import './App.css';
 
 
 
 function App() {
-
 
   return (
     <CityProvider>
@@ -38,6 +37,7 @@ function App() {
         </Router>
     </CityProvider>
   );
+  
 }
 
 export default App;

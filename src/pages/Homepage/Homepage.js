@@ -31,13 +31,11 @@ const Homepage = () => {
     }
   }
   
-
-  
-
   useEffect(()=>{
-      axios.get('https://unilife-server.herokuapp.com/cities?limit=9&page=1')
+    window.scrollTo(0, 0)
+
+    axios.get('https://unilife-server.herokuapp.com/cities?limit=9&page=1')
       .then((result) => setCities(result.data.response))
-      //.then((result) => console.log(result.data.response))
       .catch((err) => console.log(err));
 
   }, []);
@@ -61,6 +59,7 @@ const Homepage = () => {
             )}
           )}
         </div>
+
         <Link to='/uni-life/see-all-cities-page' className='btn-link'>
           <button id='seeAllCitiesBtn' className='button-style'>
             See All Cities

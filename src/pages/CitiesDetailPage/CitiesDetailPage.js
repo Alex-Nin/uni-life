@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useSelectedCity } from '../../components/CityContext'
 import { MdOutlinePlace } from "react-icons/md";
-import { TbBath, TbBed, TbRuler2 } from 'react-icons/tb'
+import { TbBath, TbBed } from 'react-icons/tb'
 import { GrHomeRounded } from "react-icons/gr";
 import students from '../../assets/students.png';
 import axios from 'axios'
@@ -21,16 +21,16 @@ const CitiesDetailPage = () => {
   const [priceDisabled, setPriceDisabled] = useState(false)
   const [typeDisabled, setTypeDisabled] = useState(false)
   const [propertyCount, setPropertyCount] = useState(0)
+  const [propertyTypes, setPropertyTypes] = useState([])
+  const [city, setCity] = useState([]);
+  const [properties, setProperties] = useState([])
+  const [filteredResults, setFilteredResults] = useState(properties)
   const [state, setState] = useState({
     bedroom: '0',
     bathroom: '0',
     price: '100000',
     type: 'all'
   })
-  const [propertyTypes, setPropertyTypes] = useState([])
-  const [city, setCity] = useState([]);
-  const [properties, setProperties] = useState([])
-  const [filteredResults, setFilteredResults] = useState(properties)
 
   const handleChange = e => {
     const value = e.target.value
@@ -132,6 +132,7 @@ const CitiesDetailPage = () => {
   }
 
   useEffect(()=>{
+    window.scrollTo(0, 0)
     
     axios.get(`https://unilife-server.herokuapp.com/properties/city/${city_id}`)
     .then((result) => setProperties(result.data.response))
@@ -146,7 +147,7 @@ const CitiesDetailPage = () => {
     .then((result) => setPropertyTypes(result.data.response))
     .catch((err) => console.log(err));
 
-  }, [properties]);
+  }, [city_id, properties.length]);
 
   return (
 

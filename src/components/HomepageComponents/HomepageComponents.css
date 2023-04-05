@@ -38,7 +38,8 @@
     gap: 0 44px;
 }
 
-.title {
+.compare-box-contianer-title,
+.compare-box-title {
     color: var(--primary-black);
 }
 
@@ -49,7 +50,7 @@
 .compare-box-contianer-title {
     font-size: 2.2rem;
     font-weight: 400;
-    margin: 0 0 54px;
+    margin-bottom: 54px;
 }
 
 .compare-box-title {
@@ -88,6 +89,10 @@
     #list {
         font-size: 1.2rem;
         padding: 14px 50px 14px 29px;
+    }
+
+    #seeAllCitiesBtn {
+        font-size: 1.3rem;
     }
 }
 
@@ -143,7 +148,7 @@
         height: fit-content;
         padding: 40px 43px;
         gap: 20px 0;
-        bottom: 130px;
+        bottom: 105px;
     }
 
     #list {
@@ -155,9 +160,12 @@
         padding: 75px 16px;
     }
 
-    .compare-box-container-title, 
-    .compare-box-title {
+    .compare-box-contianer-title {
         font-size: 1.8rem;
+    }
+
+    .compare-box-title {
+        font-size: 1.6rem;
     }
 
     .comapre-box-description {
@@ -166,5 +174,44 @@
 
     .compare-box-container {
         width: 90%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .compare-box-container {
+        gap: 0;
+        margin: 0 auto;
+    }
+
+
+    .compare-box-element {
+        padding: 39px 16px;
+    }
+
+    .compare-box-contianer-title {
+        font-size: 1.5rem;
+        margin-bottom: 0px;
+    }
+
+    .compare-box-title {
+        font-size: 1.2rem;
+        margin: -10px 0 10px;
+    }
+
+    .comapre-box-description {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin-bottom: 17px;
+    }
+
+    .compare-box > svg {
+        width: 48px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .search-modal {
+        width: auto;
     }
 }

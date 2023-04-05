@@ -64,6 +64,11 @@
 }
 
 @media screen and (max-width: 1080px) {
+    .cities-container-title {
+        width: 90%;
+        margin: 0 auto;
+    }
+
     .home-cities-box-container {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -89,7 +94,7 @@
     }
 
     .cities-container {
-        margin: 0 0 50px;
+        margin: -50px 0 50px;
     }
 
     .cities-box {
@@ -99,8 +104,7 @@
 
     .cities-container-title {
         font-size: 2rem;
-        width: 90%;
-        margin: 30px auto 0;
+        margin: 0 auto;
     }
 }
 
