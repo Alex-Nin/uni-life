@@ -1,4 +1,5 @@
-.cities-container {
+.cities-container,
+.featured-cities-container {
     text-align: center;
     margin: 50px 0;
 }
@@ -93,7 +94,7 @@
         grid-template-columns: 1fr;  
     }
 
-    .cities-container {
+    .featured-cities-container {
         margin: -50px 0 50px;
     }
 

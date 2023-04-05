@@ -77,3 +77,15 @@
     transition: 0.3s;
 }
 
+
+@media screen and (max-width: 1200px) {
+    .favorites-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .favorites-container {
+        grid-template-columns: 1fr;
+    }
+}

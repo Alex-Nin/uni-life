@@ -45,7 +45,7 @@ const Homepage = () => {
       <Header heading={heading} paragraph={paragraph} />
       <SearchModal />
       
-      <div className='cities-container'>
+      <div className='featured-cities-container'>
         <h3 className='cities-container-title'>Student accommodations in our top cities</h3>
         <div className='home-cities-box-container'>
           {cities.map( (city, id) => {

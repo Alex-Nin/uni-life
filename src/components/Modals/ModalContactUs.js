@@ -23,7 +23,7 @@ const ModalContactUs = ({ position, display, setDisplay, setPosition }) => {
             <p>
                 Feel free to contact us if you have any questions.
                 <br />
-                Looking forward to hear from you.
+                Looking forward to hearing from you.
             </p>
             <form className='modal-input-container'>
                 <div className='modal-input-container-left'>
@@ -42,7 +42,7 @@ const ModalContactUs = ({ position, display, setDisplay, setPosition }) => {
                 </div>
                 <div className='modal-input-container-right'>
                     <div className='modal-input'>
-                        <label>Are you a...</label>
+                        <label>Current Status</label>
                         <select id="status">
                             <option value="under-graduate">Under Graduate</option>
                             <option value="graduate">Graduate</option>

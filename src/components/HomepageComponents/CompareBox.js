@@ -2,27 +2,25 @@ import React from 'react'
 import { TbMapSearch, TbListCheck, TbReceipt } from 'react-icons/tb';
 import { IconContext } from 'react-icons';
 
-
-
-
 const CompareBox = () => {
 
-    const iconStyles = {
-        color: 'var(--secondary-blue)',
-        strokeWidth: 1.3,
-      }
-      const iconSize = {
-        bannerIcons: {
-          size: 80
-        },
-        nonBannerIcons: {
-          size: 45
-        }
-      }
+  const iconStyles = {
+    color: 'var(--secondary-blue)',
+    strokeWidth: 1.3,
+  }
+
+  const iconSize = {
+    bannerIcons: {
+      size: 80
+    },
+    nonBannerIcons: {
+      size: 45
+    }
+  }
 
   return (
     <div className='compare-box-element'>
-        <h3 className='compare-box-contianer-title'>Compare all inclusive student homes.</h3>
+        <h3 className='compare-box-contianer-title'>Compare all-inclusive student homes.</h3>
         <div className='compare-box-container'>
           <div className='compare-box'>
             <IconContext.Provider value={iconSize.bannerIcons}>

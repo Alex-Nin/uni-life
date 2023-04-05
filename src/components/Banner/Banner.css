@@ -1,6 +1,7 @@
 .banner,
 .banner-left,
-.banner-right {
+.banner-right
+.banner-right-menu {
     display: flex;
 }
 
@@ -10,25 +11,27 @@
 
 .banner {
     justify-content: space-between;
+    align-items: center;
     background-color: var(--primary-blue);
     padding: 14px 84px;
 }
 
 .banner-left > *, 
-.banner-right > * {
+.banner-right-menu > * {
     color: var(--primary-white);
 }
 
-.banner-right,
-.banner-left {
-    align-items: center;  
+.banner-right-menu{
+    align-items: center;
 }
 
 .banner-left p{
+    position: relative;
+    top: 3px;
     font-size: 1.8em;
 }
 
-.banner-right p{
+.banner-right-menu p{
     font-size: 0.9rem;
     font-weight: 200;
     cursor: pointer;
@@ -41,16 +44,28 @@
 
 
 @media screen and (max-width: 650px) {
-    .banner-right {
+    .banner-right-menu {
         position: absolute;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         background-color: var(--primary-blue);
         border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        width: 100%;
         right: 0;
+        z-index: 4;
         transition: 0.3s;
-        z-index: 3;
         padding: 70px 50px 80px 60px;
+    }
+
+    .banner-right {
+        position: fixed;
+        background-color: rgba(0,0,0,0.4);
+        overscroll-behavior: none;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
     }
 
     #bannerIcon {
@@ -76,7 +91,7 @@
         position: absolute;
         margin: 10px;
         top: 5px;
-        left: 5px;
+        right: 15px;
         stroke-width: 1.3;
     }
 }

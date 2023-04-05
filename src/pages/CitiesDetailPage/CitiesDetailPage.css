@@ -201,11 +201,7 @@
 
 @media screen and (max-width: 546px) {
     .dropdown-container {
-        bottom: 190px;
-    }
-
-    .props-container {
-        margin: -115px auto 100px;
+        bottom: 108px;
     }
 }
 
