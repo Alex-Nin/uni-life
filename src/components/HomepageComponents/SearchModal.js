@@ -33,12 +33,10 @@ const SearchModal = () => {
 
     axios.get(`https://unilife-server.herokuapp.com/cities?page=1`)
       .then((result) => setCities(result.data.response))
-      //.then((result) => console.log(result.data.response))
       .catch((err) => console.log(err));
 
     axios.get(`https://unilife-server.herokuapp.com/cities?page=2`)
-      .then((result) => result.data.response.forEach((element) => {setCities((prevCities) => [...prevCities, element])}) )
-      //.then((result) => console.log(result.data.response))
+      .then((result) => result.data.response.forEach((element) => {setCities((prevCities) => [...prevCities, element])}))
       .catch((err) => console.log(err));
 
     //This thrid axios call ensures that the second pages' results doesn't come up undefined 

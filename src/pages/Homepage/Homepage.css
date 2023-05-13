@@ -38,6 +38,7 @@
     font-size: 1.3rem;
     font-weight: 500;
     cursor: pointer;
+    padding: 0px 12px;
 }
 
 #searchCompareBtn {
@@ -50,7 +51,7 @@
 }
 
 #findHomeBtn{
-    width: 160px;
+    width: 30%;
 }
 
 #imageOfPerson {
@@ -62,13 +63,7 @@
 }
 
 @media screen and (max-width: 1080px) {
-    .button-style {
-        font-size: 1rem;
-    }
-
-    #findHomeBtn{
-        width: 130px;
-    }
+    
 
     #imageOfPerson {
         margin-top: 36px;
@@ -87,11 +82,7 @@
 
 
 @media screen and (max-width: 750px) {
-    #findHomeBtn{
-        font-size: 0.8rem;
-        height: 42px;
-        width: 130px;
-    }
+    
 }
 
 @media screen and (max-width: 650px) {
