@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/uni-life/static/css/main.81edf2e9.css",
+    "main.css": "/uni-life/static/css/main.f0049e43.css",
     "main.js": "/uni-life/static/js/main.c867abb3.js",
     "static/media/cover-img.png": "/uni-life/static/media/cover-img.2736f0fb552f6c7ccbaf.png",
     "static/media/students.png": "/uni-life/static/media/students.155f8720cfc41224e126.png",
     "static/media/person.png": "/uni-life/static/media/person.9449ffd55b90a18778d0.png",
     "index.html": "/uni-life/index.html",
-    "main.81edf2e9.css.map": "/uni-life/static/css/main.81edf2e9.css.map",
+    "main.f0049e43.css.map": "/uni-life/static/css/main.f0049e43.css.map",
     "main.c867abb3.js.map": "/uni-life/static/js/main.c867abb3.js.map"
   },
   "entrypoints": [
-    "static/css/main.81edf2e9.css",
+    "static/css/main.f0049e43.css",
     "static/js/main.c867abb3.js"
   ]
 }
