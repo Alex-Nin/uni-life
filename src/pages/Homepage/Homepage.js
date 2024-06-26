@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import HomeCitiesCard from '../../components/CitiesCard/HomeCitiesCard';
 import Header from '../../components/Header/Header';
 import SearchModal from '../../components/HomepageComponents/SearchModal';
-import { Link } from 'react-router-dom';
 import person from '../../assets/person.png';
 import { TbHeart, TbHome } from 'react-icons/tb';
 import { IconContext } from 'react-icons';
-import './Homepage.css';
 import { useSetSelectedCity } from '../../components/CityContext'
 import CompareBox from '../../components/HomepageComponents/CompareBox'
-
+import './Homepage.css';
 
 const Homepage = () => {
   const heading = 'Find student homes with bills included';
@@ -48,7 +47,7 @@ const Homepage = () => {
       <div className='featured-cities-container'>
         <h3 className='cities-container-title'>Student accommodations in our top cities</h3>
         <div className='home-cities-box-container'>
-          {cities.map( (city, id) => {
+          {cities ? cities.map( (city, id) => {
             return (
               <Link to={`/uni-life/cities-detail-page/${city._id}`} onClick={() => {setSelectedCity(city.name)}}>
                 <HomeCitiesCard 
@@ -57,9 +56,9 @@ const Homepage = () => {
                 /> 
             </Link>
             )}
-          )}
+          ) : <div><h3>Loading Results</h3></div>}
         </div>
-
+            
         <Link to='/uni-life/see-all-cities-page' className='btn-link'>
           <button id='seeAllCitiesBtn' className='button-style'>
             See All Cities
@@ -68,8 +67,6 @@ const Homepage = () => {
       </div>
 
       <CompareBox />
-
-      <img id='imageOfPerson' alt='guy-on-phone' src={person} />
       <div className='selection-favorites-element'>
         <div className='selection-favorites-item'>
           <IconContext.Provider value={{size: 65}}>

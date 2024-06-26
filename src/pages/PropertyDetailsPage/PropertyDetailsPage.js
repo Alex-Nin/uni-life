@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { TbChevronLeft, TbBath, TbBed, TbCheck, TbHeart } from 'react-icons/tb'
 import { useParams } from 'react-router-dom'
@@ -22,12 +22,31 @@ const PropertyDetailsPage = () => {
         }
     }
 
+    const divRef = useRef()
+
     const [iconSavedStyle, setIconSavedStyle] = useState(iconStyle.notSaved)
     const [bookModalDisplay, setBookModalDisplay] = useState('none')
     const [modalPosition, setModalPosition] = useState('-1000px')
     const [property, setProperty] = useState(null)
     const { prop_id, city_id } = useParams()
     const savedPropertyList = JSON.parse(localStorage.getItem("saved-properties")) || []
+    const [imgHeight, setImgHeight] = useState('40')
+
+    useEffect(()=>{
+        window.scrollTo(0, 0)
+
+        axios.get(`https://unilife-server.herokuapp.com/properties/${prop_id}`)
+            .then((result) => result !== undefined ? setProperty(result.data) : null)
+            .catch((err) => console.log(err));
+    }, [prop_id]);
+
+
+    const getElementHeight = () => {
+        if(divRef.current) {
+            const newHeight = divRef.current.clientHeight;
+            setImgHeight(newHeight);
+        }
+    };
 
     const handleBookClick = () => {
         setBookModalDisplay('block')
@@ -47,14 +66,16 @@ const PropertyDetailsPage = () => {
         }
         setIconSavedStyle(iconStyle.saved)
     }
+    
+    useEffect(() =>{
 
-    useEffect(()=>{
-        window.scrollTo(0, 0)
+        getElementHeight()
 
-        axios.get(`https://unilife-server.herokuapp.com/properties/${prop_id}`)
-            .then((result) => result !== undefined ? setProperty(result.data) : null)
-            .catch((err) => console.log(err));
-    }, [prop_id]);
+    }, [property]) //Property is used as the dependency because the height needs to rerender when the information is grabbed from the api
+
+    useEffect(() => {
+        window.addEventListener("resize", getElementHeight);
+    }, []);
 
     function convertObjToArray(prices) {
         const newPrices = []
@@ -67,8 +88,8 @@ const PropertyDetailsPage = () => {
   return (
     <div className='props-details-page'>
         <Link to={`../uni-life/cities-detail-page/${city_id}`} id='backToSearch'>
-        <TbChevronLeft style={{verticalAlign: 'top', marginRight: 11}}></TbChevronLeft>
-        <p>Back to Search</p>
+            <TbChevronLeft style={{verticalAlign: 'top', marginRight: 11}}></TbChevronLeft>
+            <p>Back to Search</p>
         </Link>
         <div className='prop-details-container'>
             {property !== null ? 
@@ -80,71 +101,75 @@ const PropertyDetailsPage = () => {
             setDisplay={setBookModalDisplay}
             setPosition={setModalPosition}
             />
-            <div className='prop-imgs-container'>
-                <div className='prop-large-img' style={{backgroundImage: `url(${property.images[0]})`}}></div>
-                <div className='prop-small-imgs'>
-                    <div style={{backgroundImage: `url(${property.images[1]})`}}></div>
-                    <div style={{backgroundImage: `url(${property.images[2]})`}}></div>
-                    <div style={{backgroundImage: `url(${property.images[3]})`}}></div>
-                </div>
-            </div>
-            <div>
-                <div className='prop-details-box-container'>
-                    <h2>{property.address.street}, {property.address.city}, {property.address.postcode}</h2>
-                    <div className='prop-details-boxes'>
-                        <div className='prop-details-box'>
-                            <label>Bedrooms</label>
-                            <div id='fontStyle' className='center-items'>
-                                <TbBed size={33}></TbBed>
-                                <p>{property.bedroom_count}</p>
+            <div className='top-container'>
+                <div className='prop-imgs-container'>
+                    <div className='prop-large-img' style={{backgroundImage: `url(${property.images[0]})`, height: `calc(${imgHeight}px - 5vh`}}></div>
+                    <div className='prop-small-imgs'>
+                        <div style={{backgroundImage: `url(${property.images[1]})`}}></div>
+                        <div style={{backgroundImage: `url(${property.images[2]})`}}></div>
+                        <div style={{backgroundImage: `url(${property.images[3]})`}}></div>
+                    </div>
+                </div> {/* props-imgs-container closing div */}
+                <div className='props-detail-box-and-detail-btns-container'>
+                    <div className='prop-details-box-container' ref={divRef}>
+                        <h2>{property.address.street}, {property.address.city}, {property.address.postcode}</h2>
+                        <div className='prop-details-boxes'>
+                            <div className='prop-details-box'>
+                                <label>Bedrooms</label>
+                                <div id='fontStyle' className='center-items'>
+                                    <TbBed size={33}></TbBed>
+                                    <p>{property.bedroom_count}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className='prop-details-box'>
-                            <label>Bathrooms</label>
-                            <div id='fontStyle' className='center-items'>
-                                <TbBath size={33}></TbBath>
-                                <p>{property.bathroom_count}</p>
+                            <div className='prop-details-box'>
+                                <label>Bathrooms</label>
+                                <div id='fontStyle' className='center-items'>
+                                    <TbBath size={33}></TbBath>
+                                    <p>{property.bathroom_count}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className='prop-details-box'>
-                            <label>Propety Type</label>
-                            <p>{property.property_type}</p>
-                        </div>
-                        <div className='prop-details-box'>
-                            <label>Deposit</label>
-                            <p>${property.deposit}</p>
-                        </div>
-                        <div className='prop-details-box'>
-                            <label>Funished Type</label>
-                            <p>{property.furnished}</p>
-                        </div>
-                        <div className='prop-details-box'>
-                            <label>Available From</label>
-                            <p>{property.availability}</p>
+                            <div className='prop-details-box'>
+                                <label>Propety Type</label>
+                                <p>{property.property_type}</p>
+                            </div>
+                            <div className='prop-details-box'>
+                                <label>Deposit</label>
+                                <p>${property.deposit}</p>
+                            </div>
+                            <div className='prop-details-box'>
+                                <label>Funished Type</label>
+                                <p>{property.furnished}</p>
+                            </div>
+                            <div className='prop-details-box'>
+                                <label>Available From</label>
+                                <p>{property.availability}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='prop-detials-btns center-items'>
-                    <button id='shortlistBtn' onClick={() => handleShortlistClick(property)}>
-                    <TbHeart size={23} style={iconSavedStyle}></TbHeart>
-                    Shortlist
-                    </button>
-                    <button id='bookViewingBtn' onClick={handleBookClick}>
-                        Book Viewing
-                    </button>
-                </div>
+                    <div className='prop-detials-btns center-items'>
+                        <button id='shortlistBtn' onClick={() => handleShortlistClick(property)}>
+                        <TbHeart size={23} style={iconSavedStyle}></TbHeart>
+                        Shortlist
+                        </button>
+                        <button id='bookViewingBtn' onClick={handleBookClick}>
+                            Book Viewing
+                        </button>
+                    </div>
+                </div> {/* props-detail-box-and-detail-btns-container closing div */}
             </div>
-            <div className='property-description'>
-                <h2 className='prop-description-titles'>Description</h2>
-                <p>{property.property_description}</p>
-            </div>
-            <div className='prop-bedroom-prices'>
-                <h2 className='prop-description-titles'>Bedroom Prices</h2>
-                <ul>
-                    {convertObjToArray(property.bedroom_prices).map((price, id) => (
-                        <li key={id}><p>Bedroom {id+1}</p><p>${price} per week</p></li>
-                    ))}
-                </ul>
+            <div className='description-and-prices'>
+                <div className='property-description'>
+                    <h2 className='prop-description-titles'>Description</h2>
+                    <p>{property.property_description}</p>
+                </div>
+                <div className='prop-bedroom-prices'>
+                    <h2 className='prop-description-titles'>Bedroom Prices</h2>
+                    <ul>
+                        {convertObjToArray(property.bedroom_prices).map((price, id) => (
+                            <li key={id}><p>Bedroom {id+1}</p><p>${price} per week</p></li>
+                        ))}
+                    </ul>
+                </div>
             </div>
             <div className='prop-key-features'>
                 <h2 className='prop-description-titles'>Key Features</h2>
@@ -155,7 +180,7 @@ const PropertyDetailsPage = () => {
                 </ul>
             </div>
          </>
-            : null }
+            : <p>Your results will be displayed momentarily</p>}
             
         </div>
     </div>

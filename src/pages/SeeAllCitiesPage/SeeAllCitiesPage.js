@@ -16,7 +16,7 @@ const SeeAllCitiesPage = () => {
   useEffect(()=>{
 
     window.scrollTo(0, 0)
-
+    
     axios.get(`https://unilife-server.herokuapp.com/cities?page=1`)
       .then((result) => setCities(result.data.response))
       .catch((err) => console.log(err));

@@ -1,3 +1,15 @@
+/* 
+
+1. Continue to fix this page
+2. Make the pictures responsive
+
+*/
+
+.top-container {
+    display: flex;
+    gap: 30px;
+}
+
 .props-details-page {
     width: 88%;
     margin: 80px auto;
@@ -15,10 +27,16 @@
 }
 
 .prop-details-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 80px 50px;
+    display: flex;
+    flex-direction: column;
     margin-top: 30px;
+}
+
+.prop-imgs-container,
+.props-detail-box-and-detail-btns-container,
+.property-description,
+.prop-bedroom-prices{
+    flex-basis: 50%;
 }
 
 .prop-large-img {
@@ -117,8 +135,13 @@
     cursor: pointer;
 }
 
+.description-and-prices {
+    display: flex;
+    gap: 40px;
+}
+
 .property-description {
-    line-height: 2.2rem;
+    line-height: 2.5rem;
 }
 
 .prop-description-titles {
@@ -142,7 +165,7 @@
 .prop-bedroom-prices ul li {
     display: flex;
     justify-content: space-between;
-    padding: 30px 25px;
+    padding: 23px 25px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -157,11 +180,19 @@
     padding-bottom: 40px;
 }
 
-@media screen  and (max-width: 1000px) {
-    .prop-details-container {
-        grid-template-columns: minmax(200px, 1fr);
+@media screen  and (max-width: 1080px) {
+    .top-container {
+        flex-direction: column;
     }
     
+    .prop-details-container {
+        display: grid;
+        grid-template-columns: 60% 1fr;
+    }
+
+    .description-and-prices {
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 650px) {

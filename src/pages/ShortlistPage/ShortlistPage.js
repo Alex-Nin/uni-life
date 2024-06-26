@@ -25,6 +25,7 @@ const ShortlistPage = () => {
 
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     setProperties(savedPropertyList)
   }, [savedPropertyList])
 
