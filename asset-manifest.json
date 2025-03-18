@@ -1,16 +1,35 @@
 {
   "files": {
-    "main.css": "/uni-life/static/css/main.f0049e43.css",
-    "main.js": "/uni-life/static/js/main.c867abb3.js",
+    "main.css": "/uni-life/static/css/main.d2b604e2.css",
+    "main.js": "/uni-life/static/js/main.f9549977.js",
+    "static/media/city5.jpg": "/uni-life/static/media/city5.90d2a18f723ef9bba106.jpg",
+    "static/media/city1.jpg": "/uni-life/static/media/city1.266d336f84a30f101275.jpg",
+    "static/media/city4.jpg": "/uni-life/static/media/city4.530859329f35cf636707.jpg",
+    "static/media/city3.jpg": "/uni-life/static/media/city3.4b13ecf5162561dc4f34.jpg",
+    "static/media/city7.jpg": "/uni-life/static/media/city7.324d156789ef804b334f.jpg",
+    "static/media/city6.jpg": "/uni-life/static/media/city6.2966923786518bafd077.jpg",
+    "static/media/city2.jpg": "/uni-life/static/media/city2.3398d14f2fb200f4c86a.jpg",
     "static/media/cover-img.png": "/uni-life/static/media/cover-img.2736f0fb552f6c7ccbaf.png",
+    "static/media/city15.jpg": "/uni-life/static/media/city15.ce5ce520d7a7157e121b.jpg",
+    "static/media/city20.jpg": "/uni-life/static/media/city20.7887aed8d17147b73dfb.jpg",
+    "static/media/city14.jpg": "/uni-life/static/media/city14.b2855bfde7eb1613c231.jpg",
+    "static/media/city11.jpg": "/uni-life/static/media/city11.05008a89638d72465a4e.jpg",
+    "static/media/city8.jpg": "/uni-life/static/media/city8.867a1323edb9c7400dc3.jpg",
     "static/media/students.png": "/uni-life/static/media/students.155f8720cfc41224e126.png",
-    "static/media/person.png": "/uni-life/static/media/person.9449ffd55b90a18778d0.png",
+    "static/media/city19.jpg": "/uni-life/static/media/city19.a6f00c67a9ffaa3d5236.jpg",
+    "static/media/city18.jpg": "/uni-life/static/media/city18.e8aa7f84b2db8598885e.jpg",
+    "static/media/city17.jpg": "/uni-life/static/media/city17.95059bc1de8056884bf4.jpg",
+    "static/media/city13.jpg": "/uni-life/static/media/city13.2a09a05d0b85c926f1f0.jpg",
+    "static/media/city12.jpg": "/uni-life/static/media/city12.0cd683c394c6d6df50eb.jpg",
+    "static/media/city10.jpg": "/uni-life/static/media/city10.e8e264445780de1e93ad.jpg",
+    "static/media/city16.jpg": "/uni-life/static/media/city16.17aeca9189dc2f5bdf6f.jpg",
+    "static/media/city9.jpg": "/uni-life/static/media/city9.da5caa684bc945f06899.jpg",
     "index.html": "/uni-life/index.html",
-    "main.f0049e43.css.map": "/uni-life/static/css/main.f0049e43.css.map",
-    "main.c867abb3.js.map": "/uni-life/static/js/main.c867abb3.js.map"
+    "main.d2b604e2.css.map": "/uni-life/static/css/main.d2b604e2.css.map",
+    "main.f9549977.js.map": "/uni-life/static/js/main.f9549977.js.map"
   },
   "entrypoints": [
-    "static/css/main.f0049e43.css",
-    "static/js/main.c867abb3.js"
+    "static/css/main.d2b604e2.css",
+    "static/js/main.f9549977.js"
   ]
 }
