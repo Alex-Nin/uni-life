@@ -1,0 +1,90 @@
+.all-states-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 120px;
+  border-radius: 20px;
+  background-color: var(--primary-white);
+  box-shadow: 0 2px 24px 0 rgb(172 172 172);
+  margin: 20px;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.all-states-box:hover {
+  transform: scale(1.05);
+  background-color: var(--secondary-blue);
+  color: white;
+}
+
+.all-states-box h3 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--primary-black);
+}
+
+.all-states-box:hover h3 {
+  color: white;
+}
+
+.states-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  height: 35vh;
+  color: var(--primary-white);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.states-box:hover {
+  transform: scale(1.05);
+}
+
+.states-box h3 {
+  font-size: 2.2rem;
+  text-align: center;
+  padding: 0 20px;
+}
+
+@media screen and (max-width: 1080px) {
+  .all-states-box {
+    width: 220px;
+    height: 100px;
+    padding: 0 15px;
+  }
+  
+  .all-states-box h3 {
+    font-size: 1.8rem;
+  }
+  
+  .states-box {
+    height: 40vh;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .all-states-box {
+    width: 180px;
+    height: 80px;
+    margin: 15px;
+    padding: 0 10px;
+  }
+  
+  .all-states-box h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .all-states-box {
+    width: 250px;
+    height: 100px;
+    padding: 0 20px;
+  }
+} 

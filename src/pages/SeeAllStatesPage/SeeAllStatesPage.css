@@ -1,0 +1,43 @@
+.states-container {
+  width: 90%;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.states-container-title {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 30px;
+  color: var(--primary-black);
+}
+
+.all-states-box-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 90%;
+  margin: 50px auto;
+}
+
+@media screen and (max-width: 1080px) {
+  .all-states-box-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .states-container-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .states-container-title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .all-states-box-container {
+    grid-template-columns: 1fr;
+  }
+} 

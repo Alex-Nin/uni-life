@@ -15,12 +15,19 @@
     box-sizing: content-box;
 }
 
-#list {
+.list {
     background-color: var(--primary-white);
     border-radius: 20px;
     border: 1px solid rgba(206, 211, 216, 1);
     padding: 14px 132px 14px 29px;
     font-size: 1.5rem;
+    appearance: auto;
+    color: var(--text-color);
+}
+
+.list:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
 }
 
 .compare-box-element {
@@ -66,8 +73,7 @@
 }
 
 @media screen and (max-width: 1375px) {
-
-    #list {
+    .list {
         padding: 14px 90px 14px 29px;
     }
 }
@@ -123,7 +129,7 @@
         bottom: 57px;
     }
 
-    #list {
+    .list {
         font-size: 1.5rem;
         padding: 14px 30px 14px 29px;
     }

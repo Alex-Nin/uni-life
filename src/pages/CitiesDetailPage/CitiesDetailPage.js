@@ -15,16 +15,16 @@ const CitiesDetailPage = () => {
   const paragraph = "Whatever you're after, we can help you find the right student accommodation for you."
 
   const selectedCity = useSelectedCity()  
-  const { city_id } = useParams()
+  const { city_name } = useParams()
   const [bedDisabled, setBedDisabled] = useState(false)
   const [bathDisabled, setBathDisabled] = useState(false)
   const [priceDisabled, setPriceDisabled] = useState(false)
   const [typeDisabled, setTypeDisabled] = useState(false)
   const [propertyCount, setPropertyCount] = useState(0)
   const [propertyTypes, setPropertyTypes] = useState([])
-  const [city, setCity] = useState([]);
+  const [city, setCity] = useState({name: city_name, student_life: '', universities: ''})
   const [properties, setProperties] = useState([])
-  const [filteredResults, setFilteredResults] = useState(properties)
+  const [filteredResults, setFilteredResults] = useState([])
   const [state, setState] = useState({
     bedroom: '0',
     bathroom: '0',
@@ -40,7 +40,7 @@ const CitiesDetailPage = () => {
       [name]: value
     })
     if(name === 'bedroom'){
-      setFilteredResults(properties.filter(item => item.bedroom_count >= value))
+      setFilteredResults(properties.filter(item => item.bedrooms >= value))
       if(value === '0'){
         setBathDisabled(false)
         setPriceDisabled(false)
@@ -52,7 +52,7 @@ const CitiesDetailPage = () => {
       }
     }
     else if(name === 'bathroom'){
-      setFilteredResults(properties.filter(item => item.bathroom_count >= value))
+      setFilteredResults(properties.filter(item => item.bathrooms >= value))
       if(value === '0'){
         setBedDisabled(false)
         setPriceDisabled(false)
@@ -64,7 +64,7 @@ const CitiesDetailPage = () => {
       }
     }
     else if(name === 'price'){
-      setFilteredResults(properties.filter(item => findLowest(item.bedroom_prices) <= value))
+      setFilteredResults(properties.filter(item => item.price <= value))
       if(value === '100000'){
         setBedDisabled(false)
         setBathDisabled(false)
@@ -76,7 +76,7 @@ const CitiesDetailPage = () => {
       }
     }
     else if(name === 'type'){
-      setFilteredResults(properties.filter(item => item.property_type === value))
+      setFilteredResults(properties.filter(item => item.propertyType === value))
       if(value === 'all'){
         setBedDisabled(false)
         setBathDisabled(false)
@@ -90,7 +90,7 @@ const CitiesDetailPage = () => {
   }
 
   function propsArray(){
-    if (filteredResults < 1) {
+    if (filteredResults.length < 1) {
       return properties
     }
     return filteredResults
@@ -110,47 +110,46 @@ const CitiesDetailPage = () => {
       color: state.type !== 'all' ? 'var(--primary-black)' : 'var(--border-color)' 
     }, 
   }
-  
 
-  //Finds the lowest bedroom price
-  function findLowest(prices) {
-    const newPrices = []
-    if(prices !== undefined){
-      for(let [key, value] of Object.entries(prices)) {
-        newPrices.push(value)
-      }
-      let lowest = newPrices[0]
-      
-      for (let i = 0; i < newPrices.length; i++) {
-        if (newPrices[i] < lowest){
-          lowest = newPrices[i]
-        }
-      }
-      return `${lowest}`
-    }
-    return
-  }
+  const url = `https://api.rentcast.io/v1/listings/rental/long-term?city=${city_name}&status=Active`;
+  const headers = {
+    "X-Api-Key": process.env.REACT_APP_RENTCAST_API_KEY
+  };
 
   useEffect(()=>{
     window.scrollTo(0, 0)
     
-    axios.get(`https://unilife-server.herokuapp.com/properties/city/${city_id}`)
-    .then((result) => setProperties(result.data.response))
-    .then(setPropertyCount(properties.length))
-    .catch((err) => console.log(err))
+    // Fetch properties from the API with city filter already applied
+    axios.get(url, {headers})
+      .then((result) => {
+        // The API already filters by city, so we can use the results directly
+        const cityProperties = result.data;
+        setProperties(cityProperties);
+        setPropertyCount(cityProperties.length);
+        
+        // Extract unique property types
+        const types = new Set();
+        cityProperties.forEach(property => {
+          if (property.propertyType) {
+            types.add(property.propertyType);
+          }
+        });
+        setPropertyTypes(Array.from(types).map(type => ({ name: type })));
+        
+        console.log("Properties for", city_name, ":", cityProperties);
+      })
+      .catch((err) => console.log(err));
 
-    axios.get(`https://unilife-server.herokuapp.com/cities/${city_id}`)
-    .then((result) => setCity(result.data.data[0]))
-    .catch((err) => console.log(err));
+    // Set basic city info (since we don't have detailed city data in this API)
+    setCity({
+      name: city_name,
+      student_life: `${city_name} offers a vibrant student life with numerous amenities and activities.`,
+      universities: `${city_name} is home to several prestigious educational institutions.`
+    });
 
-    axios.get('https://unilife-server.herokuapp.com/propertyTypes')
-    .then((result) => setPropertyTypes(result.data.response))
-    .catch((err) => console.log(err));
-
-  }, [city_id, properties.length]);
+  }, [city_name]);
 
   return (
-
     <>
       <Header heading={heading} paragraph={paragraph}/>
       <div className='dropdown-container'>
@@ -179,12 +178,12 @@ const CitiesDetailPage = () => {
             <label>Max Price</label>
             <select id='dropdown' name='price' onChange={handleChange} style={getStyle.price} value={state.price} disabled={priceDisabled}>
               <option value={'100000'}>Any Price</option>
-              <option value={150}>$150</option>
-              <option value={200}>$200</option>
-              <option value={250}>$250</option>
-              <option value={300}>$300</option>
-              <option value={350}>$350</option>
-              <option value={351}>$351+</option>
+              <option value={1500}>$1500</option>
+              <option value={2000}>$2000</option>
+              <option value={2500}>$2500</option>
+              <option value={3000}>$3000</option>
+              <option value={3500}>$3500</option>
+              <option value={4000}>$4000+</option>
             </select>
         </div>
         <div className='dropdown-menu'>
@@ -198,38 +197,38 @@ const CitiesDetailPage = () => {
         </div>
       </div>
       <div className='props-container'>
-        <h2 className='num-of-props'>{filteredResults < 1 ? propertyCount : filteredResults.length} homes in {selectedCity}</h2>
+        <h2 className='num-of-props'>{filteredResults.length < 1 ? propertyCount : filteredResults.length} homes in {selectedCity || city_name}</h2>
         <div className='prop-box-container'>
         {propsArray()?.map((property, id) => (
         <div className='prop-box' key={id}>
-          <div className='prop-img-container' style={{backgroundImage: `url(${property?.images[1]})`}}></div>
+          <div className='prop-img-container' style={{backgroundImage: `url(https://placehold.co/600x400?text=${property.propertyType}+in+${property.city})`}}></div>
           <div className='prop-banner'>
             <div className='prop-banner-left'>
-              <p>Rooms Starting at:</p>
-              <h4>${findLowest(property?.bedroom_prices)}</h4>
+              <p>Monthly Rent:</p>
+              <h4>${property.price}</h4>
             </div>
             <div className='prop-banner-right flex-display'>
               <div className='icon-container flex-display'>
                 <TbBed size={32.5}></TbBed>
-                <p>{property?.bedroom_count}</p>
+                <p>{property.bedrooms}</p>
               </div>
               <div className='icon-container flex-display'>
                 <TbBath size={32.5}></TbBath>
-                <p>{property?.bathroom_count}</p>
+                <p>{property.bathrooms}</p>
               </div>
             </div>
           </div>
           <div className='prop-info'>
             <div className='prop-type-furnished'>
-              <h6>{property?.property_type}</h6>
-              <h6>{property?.furnished}</h6>
+              <h6>{property.propertyType}</h6>
+              <h6>{property.squareFootage} sqft</h6>
             </div>
             <div className='address'>
               <MdOutlinePlace size={25} style={{color: "var(--secondary-blue)"}}></MdOutlinePlace>
-              <p>{property?.address.street}, {property?.address.city}, {property?.address.postcode}</p>
+              <p>{property.formattedAddress}</p>
             </div>
           </div>
-          <Link to={`../uni-life/cities-detail-page/${city_id}/property-details-page/${property?._id}`} style={{cursor: 'pointer'}}>
+          <Link to={`../uni-life/cities-detail-page/${city_name}/property-details-page/${property.id}`} style={{cursor: 'pointer'}}>
             <div className='prop-link'>
               <GrHomeRounded />
               <p>View Home</p>

@@ -10,7 +10,8 @@
 }
 
 .home-cities-box-container,
-.all-cities-box-container {
+.all-cities-box-container,
+.all-states-box-container {
     display: grid;
     width: 90%;
     margin: 50px auto;
@@ -21,47 +22,63 @@
     gap: 45px;
 }
 
-.all-cities-box-container {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 47px 21px;
+.all-cities-box-container,
+.all-states-box-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
 }
 
 .cities-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     border-radius: 40px;
     height: 35vh;
     color: var(--primary-white);
-    color: white;
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.3s ease;
+    overflow: hidden;
 }
 
+.cities-box:hover {
+    transform: scale(1.05);
+}
 
 .cities-box h3 {
     font-size: 2.2rem;
+    text-align: center;
+    padding: 0 20px;
 }
 
 .all-cities-box {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    height: 8vh;
-    border-radius: 25px;
-    border: 1px solid var(--border-color);
-    color: black;
+    align-items: center;
+    height: 120px;
+    border-radius: 20px;
+    background-color: var(--primary-white);
+    box-shadow: 0 2px 24px 0 rgb(172 172 172);
+    margin: 10px;
+    padding: 0 20px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .all-cities-box:hover {
+    transform: scale(1.05);
     background-color: var(--secondary-blue);
     color: white;
 }
 
 .all-cities-box h3 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--primary-black);
+}
+
+.all-cities-box:hover h3 {
+    color: white;
 }
 
 @media screen and (max-width: 1080px) {
@@ -78,13 +95,24 @@
         height: 40vh;
     }
 
-    .all-cities-box-container {
-        grid-template-columns: repeat(3, 1fr);
+    .all-cities-box-container,
+    .all-states-box-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .all-cities-box {
+        height: 100px;
+        padding: 0 15px;
+    }
+    
+    .all-cities-box h3 {
+        font-size: 1.8rem;
     }
 }
 
 @media screen and (max-width: 850px) {
-    .all-cities-box-container {
+    .all-cities-box-container,
+    .all-states-box-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -102,15 +130,31 @@
         height: 40vh;
     }
 
-
     .cities-container-title {
         font-size: 2rem;
         margin: 0 auto;
     }
+    
+    .all-cities-box {
+        height: 80px;
+        padding: 0 10px;
+    }
+    
+    .all-cities-box h3 {
+        font-size: 1.6rem;
+    }
 }
 
 @media screen and (max-width: 500px) {
-    .all-cities-box-container {
+    .all-cities-box-container,
+    .all-states-box-container {
         grid-template-columns: 1fr;
+    }
+    
+    .all-cities-box {
+        height: 100px;
+        width: 80%;
+        margin: 10px auto;
+        padding: 0 20px;
     }
 }

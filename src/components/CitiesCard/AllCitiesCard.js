@@ -1,16 +1,17 @@
-import React from 'react';
-import './CitiesCard.css';
+import React from 'react'
 
-const HomeCitiesCard = ({ city, id, image }) => {
+import './CitiesCard.css'
 
+
+const AllCitiesCard = ({ id, city, image }) => {
   const getStyles = {
-    homepage: {
+    cityCard: {
       backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0) 60%), url(${image})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
     },
-    headingHome: {
+    headingCity: {
       fontSize: '2.2rem',
       color: 'white',
       textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
@@ -19,12 +20,12 @@ const HomeCitiesCard = ({ city, id, image }) => {
 
   return (
     <>
-      <div className='cities-box' style={getStyles.homepage}>
-        <h3 style={getStyles.headingHome} key={id}>{city.name}</h3>
-        {/* Property count display removed */}
+      <div className='cities-box' style={getStyles.cityCard}>
+        <h3 style={getStyles.headingCity} key={id}>{city}</h3>
       </div>
     </>
   )
 }
-
-export default HomeCitiesCard
+    
+export default AllCitiesCard
+    

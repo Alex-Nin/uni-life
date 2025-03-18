@@ -17,7 +17,6 @@
 
 #backToSearch {
     color: var(--primary-black);
-
 }
 
 #backToSearch > * {
@@ -30,37 +29,40 @@
     display: flex;
     flex-direction: column;
     margin-top: 30px;
+    gap: 30px;
 }
 
 .prop-imgs-container,
 .props-detail-box-and-detail-btns-container,
 .property-description,
-.prop-bedroom-prices{
+.prop-bedroom-prices {
     flex-basis: 50%;
 }
 
 .prop-large-img {
     height: 33vh;
     background-size: cover;
+    background-position: center;
     margin-bottom: 15px;
     border-radius: 18px;
 }
 
-.prop-small-imgs{
+.prop-small-imgs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0 15px;
+    gap: 15px;
 }
 
 .prop-small-imgs > * {
     height: 11vh;
     background-size: cover;
+    background-position: center;
     border-radius: 13px;
 }
 
 .prop-details-box-container {
     text-align: center;
-    padding: 35px 0;
+    padding: 35px 20px;
     border: 1px solid var(--border-color);
     border-radius: 15px;
 }
@@ -78,7 +80,7 @@
 .prop-details-boxes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 55px 0;
+    gap: 55px 20px;
     padding: 0 20px;
 }
 
@@ -93,7 +95,7 @@
     font-weight: 600;
 }
 
-#fontStyle p{
+#fontStyle p {
     font-size: 2.3rem;
 }
 
@@ -108,22 +110,23 @@
 }
 
 .prop-detials-btns {
-    margin-top: 20px;
+    display: flex;
+    margin-top: 30px;
     gap: 0 15px;
 }
+
 .prop-detials-btns > * {
     flex-basis: 50%;
     padding: 13px 0;
     border-radius: 15px;
-    
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 #shortlistBtn {
     border: 1px solid var(--border-color);
     background-color: var(--primary-white);
-    font-size: 1.2rem;
     font-weight: 300;
-    cursor: pointer;
 }
 
 #bookViewingBtn {
@@ -132,12 +135,12 @@
     color: var(--primary-white);
     font-size: 1.3rem;
     font-weight: 600;
-    cursor: pointer;
 }
 
 .description-and-prices {
     display: flex;
     gap: 40px;
+    margin-top: 30px;
 }
 
 .property-description {
@@ -160,6 +163,7 @@
 .prop-bedroom-prices ul {
     border: 1px solid var(--border-color);
     border-radius: 15px;
+    overflow: hidden;
 }
 
 .prop-bedroom-prices ul li {
@@ -173,14 +177,14 @@
     border: none;
 }
 
-
 .prop-key-features ul li {
     display: flex;
-    gap: 0 5px;
-    padding-bottom: 40px;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
 }
 
-@media screen  and (max-width: 1080px) {
+@media screen and (max-width: 1080px) {
     .top-container {
         flex-direction: column;
     }
@@ -188,10 +192,56 @@
     .prop-details-container {
         display: grid;
         grid-template-columns: 60% 1fr;
+        gap: 30px;
     }
 
     .description-and-prices {
         flex-direction: column;
+        gap: 30px;
+    }
+    
+    .prop-details-box-container h2 {
+        font-size: 2.2rem;
+        line-height: 3rem;
+    }
+    
+    #fontStyle p {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .props-details-page {
+        width: 92%;
+        margin: 60px auto;
+    }
+    
+    .prop-details-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .prop-large-img {
+        height: 40vh;
+    }
+    
+    .prop-small-imgs > * {
+        height: 15vh;
+    }
+    
+    .prop-details-box-container {
+        padding: 25px 15px;
+    }
+    
+    .prop-details-box-container h2 {
+        width: 90%;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+    
+    .prop-details-boxes {
+        gap: 40px 10px;
+        padding: 0 10px;
     }
 }
 
@@ -199,9 +249,30 @@
     .prop-details-boxes {
         grid-template-columns: repeat(2, minmax(auto, 1fr));
     }
+    
+    .prop-description-titles {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .property-description p,
+    .prop-bedroom-prices ul li,
+    .prop-key-features ul li {
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+    }
+    
+    .prop-bedroom-prices ul li {
+        padding: 15px 20px;
+    }
 }
 
 @media screen and (max-width: 450px) {
+    .props-details-page {
+        width: 95%;
+        margin: 40px auto;
+    }
+    
     .prop-details-boxes {
         grid-template-columns: auto;
     }
@@ -210,18 +281,38 @@
         flex-direction: column;
         gap: 20px;
     }
+    
+    .prop-large-img {
+        height: 30vh;
+    }
+    
+    .prop-small-imgs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .prop-small-imgs > * {
+        height: 15vh;
+    }
 }
 
-@media screen  and (max-width: 400px) {
+@media screen and (max-width: 400px) {
     .prop-bedroom-prices ul li {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
     }
 
     .prop-details-box-container h2 {
         font-size: 1.8rem;
         line-height: 2.5rem;
+        width: 95%;
     }
     
+    #fontStyle p {
+        font-size: 1.8rem;
+    }
+    
+    .prop-details-box p {
+        font-size: 1.2rem;
+    }
 }
